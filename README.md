@@ -8,13 +8,13 @@ Fai push del progetto su un repository: Actions > "Build Mixbus Chain" parte da 
 
 Installazione sul Mac:
     unzip MixbusChain-VST3.zip -d ~/Library/Audio/Plug-Ins/VST3/
-    xattr -dr com.apple.quarantine "$HOME/Library/Audio/Plug-Ins/VST3/Mixbus Chain.vst3"
+    xattr -dr com.apple.quarantine "$HOME/Library/Audio/Plug-Ins/VST3/MixbusChain.vst3"
 Poi in Reaper: Preferences > Plug-ins > VST > Re-scan.
-(AU: stessa cosa con "~/Library/Audio/Plug-Ins/Components/Mixbus Chain.component")
+(AU: stessa cosa con "~/Library/Audio/Plug-Ins/Components/MixbusChain.component")
 
 ## Windows
 Lo stesso workflow produce anche l'artifact `MixbusChain-Windows` (VST3 a 64 bit).
-Estrai lo zip: dentro c'e' la cartella `Mixbus Chain.vst3`. Copiala in
+Scarica `MixbusChain-Setup-*.exe` (installer, consigliato) oppure lo zip con la cartella `MixbusChain.vst3`. Copiala in
 `C:\Program Files\Common Files\VST3\` (servono i permessi di amministratore), oppure in una
 cartella tua da aggiungere in Reaper: Options > Preferences > Plug-ins > VST > Edit path list.
 Poi Re-scan.

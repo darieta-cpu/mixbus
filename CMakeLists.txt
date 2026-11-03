@@ -31,7 +31,7 @@ juce_add_plugin(MixbusChain
     PLUGIN_MANUFACTURER_CODE Dari
     PLUGIN_CODE Mbch
     FORMATS VST3 AU            # aggiungi/togli formati qui
-    PRODUCT_NAME "Mixbus Chain"
+    PRODUCT_NAME "MixbusChain"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
     NEEDS_MIDI_OUTPUT FALSE

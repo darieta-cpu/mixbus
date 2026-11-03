@@ -22,7 +22,8 @@ public:
 
 private:
     void timerCallback() override;
-    void drawPanel (juce::Graphics&, juce::Rectangle<int>, const juce::String&, juce::Colour);
+    void drawUnit (juce::Graphics&, juce::Rectangle<int>, const juce::String&, juce::Colour, bool hasToggle = true);
+    static void drawScrew (juce::Graphics&, float cx, float cy, float angle);
     void setupToggle (juce::ToggleButton&, std::unique_ptr<ui::APVTS::ButtonAttachment>&, const char* id, juce::Colour);
 
     MasterChainProcessor& proc;

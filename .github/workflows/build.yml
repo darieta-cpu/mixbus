@@ -9,7 +9,7 @@ jobs:
   macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
       - name: Configure
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DMC_COPY=FALSE
@@ -29,7 +29,7 @@ jobs:
           ditto -c -k --keepParent "$VST3" dist/MixbusChain-VST3.zip
           ditto -c -k --keepParent "$AU" dist/MixbusChain-AU.zip
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v4
         with:
           name: MixbusChain-macOS
           path: dist/*.zip
@@ -37,7 +37,7 @@ jobs:
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
       - name: Configure
         run: cmake -B build -DMC_COPY=FALSE
@@ -49,22 +49,23 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path dist | Out-Null
-          New-Item -ItemType Directory -Path payload | Out-Null
           $vst3 = Get-ChildItem -Path build -Recurse -Directory -Filter "*.vst3" | Select-Object -First 1
-          if (-not $vst3) { throw "Cartella .vst3 non trovata" }
+          if (-not $vst3) { throw "VST3 non trovato nella cartella build" }
           Write-Host "VST3: $($vst3.FullName)"
-          Copy-Item -Path $vst3.FullName -Destination "payload\Mixbus Chain.vst3" -Recurse
-          Compress-Archive -Path $vst3.FullName -DestinationPath dist/MixbusChain-VST3-Windows.zip
+          Copy-Item -Path $vst3.FullName -Destination "dist/MixbusChain.vst3" -Recurse
+          Compress-Archive -Path "dist/MixbusChain.vst3" -DestinationPath dist/MixbusChain-VST3-Windows.zip
 
-      - name: Build installer
+      - name: Build installer (Inno Setup)
         shell: pwsh
         run: |
-          choco install innosetup -y --no-progress
-          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          & $iscc installer/MixbusChain.iss
+          if ($LASTEXITCODE -ne 0) { throw "ISCC ha dato errore" }
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v4
         with:
           name: MixbusChain-Windows
           path: |
-            output/MixbusChain-Setup.exe
             dist/*.zip
+            dist/*.exe

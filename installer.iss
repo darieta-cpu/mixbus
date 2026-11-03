@@ -1,8 +1,8 @@
 [Setup]
-AppName=Mixbus Chain
+AppName=MixbusChain
 AppVersion=0.1.0
 AppPublisher=DaniArieta
-DefaultDirName={autopf}\Mixbus Chain
+DefaultDirName={autopf}\MixbusChain
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 PrivilegesRequired=admin
@@ -14,4 +14,4 @@ Compression=lzma
 SolidCompression=yes
 
 [Files]
-Source: "payload\Mixbus Chain.vst3\*"; DestDir: "{commonpf64}\Common Files\VST3\Mixbus Chain.vst3"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "payload\MixbusChain.vst3\*"; DestDir: "{commonpf64}\Common Files\VST3\MixbusChain.vst3"; Flags: ignoreversion recursesubdirs createallsubdirs
